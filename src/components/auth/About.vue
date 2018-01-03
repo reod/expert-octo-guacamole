@@ -38,7 +38,7 @@
           </ul>
         </p>
         <p>
-          Enjoy responsible and feel the game!
+          Enjoy responsibly and feel the game!
         </p>
       </section>
     </article>
