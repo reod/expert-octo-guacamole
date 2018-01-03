@@ -1,10 +1,14 @@
 /* eslint-disable no-param-reassign */
 import * as R from 'ramda';
 
-const { API_URL } = process.env;
+const {
+  API_URL,
+} = process.env;
 
 export const socket = (vm) => {
-  const { token } = vm.$store.getters;
+  const {
+    token,
+  } = vm.$store.getters;
   const url = API_URL.replace('http', 'ws');
   const ws = new WebSocket(`${url}/events/ws?raw`, token);
   return ws;
@@ -15,13 +19,14 @@ export default {
     let handler;
     let usedVm;
     let old;
+    let handleClose;
     let retry = 0;
     const handleMessage = (e) => {
       const getPayload = R.pipe(R.prop('data'), JSON.parse);
       usedVm.$store.dispatch('handleEvent', getPayload(e));
     };
 
-    const switchHandlers = () => {
+    const switchHandlers = (m) => {
       retry = 0;
       if (old) {
         old.removeEventListener('open', switchHandlers, false);
@@ -32,8 +37,7 @@ export default {
       handler.addEventListener('message', handleMessage, false);
     };
 
-    const handleClose = (e) => {
-      console.log('connection is closed!');
+    handleClose = (e) => {
       retry += 1;
       if (handler) {
         old = handler;
@@ -49,6 +53,12 @@ export default {
         old = handler;
       }
       usedVm = vm;
+      const {
+        token,
+      } = vm.$store.getters;
+      if (!token) {
+        return;
+      }
       handler = socket(usedVm);
       handler.addEventListener('open', switchHandlers, false);
       handler.addEventListener('close', handleClose, false);

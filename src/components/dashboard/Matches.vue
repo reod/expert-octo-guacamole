@@ -9,7 +9,7 @@
     </div>
     <div v-if="relatedMatches.length">
       <div v-for="(match, index) in relatedMatches" :key="match.id" @click="modalScore(match)">
-        <div class="columns notification results is-primary-1">
+        <div class="columns match notification results is-primary-1">
           <div class="column is-5 has-text-centered">
             <div class="title">{{match.home.user.name}}</div>
             <div class="subtitle is-size-6">{{match.home.club.name}}</div>
@@ -157,6 +157,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../../style/vars.scss";
+
 .root {
   font-size: 80%;
 }
@@ -188,6 +190,18 @@ export default {
 .column {
   // outline: 1px dashed rgba(255, 255, 255, 0.2);
   padding: 0.25rem;
+}
+.match {
+  transition: all 0.4s ease;
+  outline: 1px solid rgba(255, 255, 255, 0);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0);
+  &:hover {
+    outline: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+
+    background: lighten($primary-1, 3%);
+    cursor: pointer;
+  }
 }
 </style>
 

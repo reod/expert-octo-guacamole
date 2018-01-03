@@ -7,7 +7,7 @@
             You are not logged in.
           </h1>
           <h2 class="subtitle is-hidden-touch">
-            Please do a login to proceed
+            Please log in to proceed
           </h2>
           <h2 class="subtitle" v-if="notLoggedCause">
             {{notLoggedCause}}
@@ -18,6 +18,14 @@
               <b-icon icon="github" />
             </button>
           </router-link>
+          <div class="content pad-top">
+            <h4>
+              Please note: in order to automatically login with your GitHub account you need to enable pop-ups in your browser.
+            </h4>
+            <h5>
+              In case your pop-up is blocked, please reload the page twice.
+            </h5>
+          </div>
         </div>
 
       </div>
@@ -52,4 +60,10 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.pad-top {
+  margin-top: 1rem;
+}
+</style>
+
 

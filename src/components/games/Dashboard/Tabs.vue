@@ -3,7 +3,7 @@
     <b-tabs v-model="tab">
       <b-tab-item label="Table" v-if="game.table && game.table.length > 0" icon="list-ol">
         <GameTable :game="game" v-if="!isMobile" />
-        <FocusedTable :game="game" v-else :count="game.table.length" :focus="id" />
+        <FocusedTable :game="game" v-else :count="game.table.length*2" :focus="id" />
       </b-tab-item>
       <b-tab-item label="Schedule" v-if="game.status !== 'OPEN'" icon="calendar">
         <Schedule :game="game" @updated="(game) => $emit('updated',game)" @needFocus="focus(1)" />
