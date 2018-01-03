@@ -2570,5 +2570,9 @@ export default {
   @include club(50px,"../assets/club-sprite-2.png");
   background-position: -100px -200px;
 }
+.bg-club-177 {
+  @include club(50px,"../assets/club-sprite-2.png");
+  background-position: -150px -200px;
+}
 </style>
 
