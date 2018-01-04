@@ -610,10 +610,6 @@ export default {
   @include club(48px);
   background-position: -1296px -1371px;
 }
-.bg-club-161 {
-  @include club(75px);
-  background-position: -900px -300px;
-}
 .bg-club-162 {
   @include club(48px);
   background-position: -1200px -1371px;
@@ -634,10 +630,6 @@ export default {
   @include club(48px);
   background-position: -864px -1371px;
 }
-.bg-club-167 {
-  @include club(75px);
-  background-position: -900px -750px;
-}
 .bg-club-168 {
   @include club(48px);
   background-position: -768px -1371px;
@@ -646,25 +638,13 @@ export default {
   @include club(48px);
   background-position: -672px -1371px;
 }
-.bg-club-170 {
-  @include club(75px);
-  background-position: -75px -900px;
-}
 .bg-club-171 {
   @include club(48px);
   background-position: -576px -1371px;
 }
-.bg-club-172 {
-  @include club(75px);
-  background-position: -225px -900px;
-}
 .bg-club-173 {
   @include club(48px);
   background-position: -480px -1371px;
-}
-.bg-club-174 {
-  @include club(48px);
-  background-position: -384px -1371px;
 }
 .bg-club-175 {
   @include club(48px);
@@ -673,10 +653,6 @@ export default {
 .bg-club-176 {
   @include club(48px);
   background-position: -192px -1371px;
-}
-.bg-club-177 {
-  @include club(75px);
-  background-position: -600px -900px;
 }
 .bg-club-178 {
   @include club(48px);
@@ -690,10 +666,6 @@ export default {
   @include club(48px);
   background-position: -1398px -1248px;
 }
-.bg-club-181 {
-  @include club(75px);
-  background-position: -900px -900px;
-}
 .bg-club-182 {
   @include club(48px);
   background-position: -1398px -1152px;
@@ -705,10 +677,6 @@ export default {
 .bg-club-184 {
   @include club(48px);
   background-position: -1398px -1056px;
-}
-.bg-club-185 {
-  @include club(75px);
-  background-position: -975px -225px;
 }
 .bg-club-186 {
   @include club(48px);
@@ -1222,10 +1190,6 @@ export default {
   @include club(48px);
   background-position: -1275px -582px;
 }
-.bg-club-314 {
-  @include club(75px);
-  background-position: -675px -1200px;
-}
 .bg-club-315 {
   @include club(48px);
   background-position: -1275px -678px;
@@ -1233,10 +1197,6 @@ export default {
 .bg-club-316 {
   @include club(48px);
   background-position: -1275px -726px;
-}
-.bg-club-317 {
-  @include club(75px);
-  background-position: -525px -1200px;
 }
 .bg-club-318 {
   @include club(48px);
@@ -1369,10 +1329,6 @@ export default {
 .bg-club-350 {
   @include club(48px);
   background-position: -1104px -1275px;
-}
-.bg-club-351 {
-  @include club(75px);
-  background-position: -975px -1125px;
 }
 .bg-club-352 {
   @include club(48px);
