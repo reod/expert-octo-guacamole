@@ -9,16 +9,18 @@
         </b-table-column>
         <b-table-column label="Player">
           <div class="is-flex">
-            <router-link :to="`/users/${props.row.id}`"> {{user(props.row.id).name}}</router-link>
+            <router-link :to="`/users/${props.row.id}`"> {{user(props.row.id).name}} -
+              <span class="italic">{{club(props.row.id).name}}</span>
+            </router-link>
           </div>
         </b-table-column>
-        <b-table-column label="PL" width=1 centered> {{props.row.played}}</b-table-column>
-        <b-table-column label="W" class="is-hidden-mobile" width=1 centered numeric>{{props.row.wins}}</b-table-column>
-        <b-table-column label="D" class="is-hidden-mobile" width=1 centered numeric>{{props.row.draws}}</b-table-column>
-        <b-table-column label="L" class="is-hidden-mobile" width=1 centered numeric>{{props.row.loses}}</b-table-column>
-        <b-table-column label="B" class="is-hidden-mobile" width=1 centered numeric>{{(props.row.balance > 0 ? '+'+props.row.balance : props.row.balance)}}</b-table-column>
-        <b-table-column label="GS-GC" class="is-hidden-mobile" width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
-        <b-table-column label="PTS" width=1 centered numeric>{{props.row.points}}</b-table-column>
+        <b-table-column label=" PL " width=1 centered> {{props.row.played}}</b-table-column>
+        <b-table-column label="W " class="is-hidden-mobile " width=1 centered numeric>{{props.row.wins}}</b-table-column>
+        <b-table-column label="D " class="is-hidden-mobile " width=1 centered numeric>{{props.row.draws}}</b-table-column>
+        <b-table-column label="L " class="is-hidden-mobile " width=1 centered numeric>{{props.row.loses}}</b-table-column>
+        <b-table-column label="B " class="is-hidden-mobile " width=1 centered numeric>{{(props.row.balance > 0 ? '+'+props.row.balance : props.row.balance)}}</b-table-column>
+        <b-table-column label="GS-GC " class="is-hidden-mobile " width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
+        <b-table-column label="PTS " width=1 centered numeric>{{props.row.points}}</b-table-column>
       </template>
     </b-table>
   </div>
@@ -70,5 +72,9 @@ export default {
 }
 .promoted {
   margin-left: 1rem;
+}
+.italic {
+  font-style: italic;
+  font-weight: 100;
 }
 </style>
