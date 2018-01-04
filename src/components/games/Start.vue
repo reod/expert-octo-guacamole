@@ -14,7 +14,7 @@
       </article>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-danger" type="button" @click="$parent.close(false)">Abandon</button>
+      <button class="button is-danger" type="button" @click="$parent.close(false)">Cancel</button>
       <button class="button is-success is-pulled-right" @click="start">Proceed starting
       </button>
     </footer>

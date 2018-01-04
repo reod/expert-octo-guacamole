@@ -8,7 +8,7 @@
       <Search :predata="change ? [change] : null" :preselect="change ? change.id : null" :has-deep-search="false" @selected="selected" simple :limit="21" />
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-danger" type="button" @click="$parent.close(false)">Abandon</button>
+      <button class="button is-danger" type="button" @click="$parent.close(false)">Cancel</button>
       <button class="button is-warning is-pulled-right" @click="join" v-if="club && (!change || club.id !== change.id)">
         {{ action }} {{ club.name }}
       </button>

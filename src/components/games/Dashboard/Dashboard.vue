@@ -49,7 +49,7 @@ export default {
         this.autoUpdated = Date.now();
       }
       switch (action) {
-        case 'left':
+        case 'leave':
           return this.$api('DELETE', `/games/${this.game.id}/competitors`, { uid: this.id })
             .then((game) => { this.game = game; });
         case 'join':

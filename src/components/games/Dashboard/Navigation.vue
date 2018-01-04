@@ -18,9 +18,9 @@
           <b-icon icon="sign-in"></b-icon>
           <span>Join</span>
         </a>
-        <a class="button is-danger" @click="$emit('action','left')" v-if="isMember && isOpen">
+        <a class="button is-danger" @click="$emit('action','leave')" v-if="isMember && isOpen">
           <b-icon icon="sign-out"></b-icon>
-          <span>Left</span>
+          <span>Leave</span>
         </a>
         <a class="button is-primary" @click="$emit('action','complete')" v-if="isAdmin && isOngoing">
           <b-icon icon="check"></b-icon>
