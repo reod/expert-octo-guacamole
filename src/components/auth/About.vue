@@ -54,7 +54,7 @@ export default {
   name: 'about',
   computed: { ...mapGetters(['isLogged']) },
 };
-</script>
+</script> 
 <style lang="scss" scoped>
 .margin-after {
   margin-bottom: 1.5rem;

@@ -26,9 +26,9 @@
 import CompleteRow from './CompleteRow';
 
 export default {
+  name: 'ModalComplete',
   components: { CompleteRow },
-  name: 'modal-complete',
-  props: ['game'],
+  props: { game: { type: Object, default: () => {} } },
   data() {
     return {
       newGames: [

@@ -2574,5 +2574,21 @@ export default {
   @include club(50px,"../assets/club-sprite-2.png");
   background-position: -150px -200px;
 }
+.bg-club-351 {
+  @include club(50px,"../assets/club-sprite-3.png");
+  background-position: -0 -0;
+}
+.bg-club-314 {
+  @include club(50px,"../assets/club-sprite-3.png");
+  background-position: -50px -0;
+}
+.bg-club-317 {
+  @include club(50px,"../assets/club-sprite-3.png");
+  background-position: -0 -50px;
+}
+.bg-club-161 {
+  @include club(50px,"../assets/club-sprite-3.png");
+  background-position: -50px -50px;
+}
 </style>
 

@@ -26,7 +26,7 @@ export default {
       usedVm.$store.dispatch('handleEvent', getPayload(e));
     };
 
-    const switchHandlers = (m) => {
+    const switchHandlers = () => {
       retry = 0;
       if (old) {
         old.removeEventListener('open', switchHandlers, false);
@@ -37,7 +37,7 @@ export default {
       handler.addEventListener('message', handleMessage, false);
     };
 
-    handleClose = (e) => {
+    handleClose = () => {
       retry += 1;
       if (handler) {
         old = handler;

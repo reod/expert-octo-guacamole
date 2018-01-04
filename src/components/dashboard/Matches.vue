@@ -56,15 +56,8 @@ import { mapGetters } from 'vuex';
 import ModalScore from './ModalScore';
 
 export default {
+  name: 'Matches',
   components: { ModalScore },
-  data() {
-    return {
-      game: null,
-      selectedMatch: null,
-      isSubmitActive: false,
-      phrase: '',
-    };
-  },
   props: {
     contests: {
       type: Array,
@@ -76,8 +69,13 @@ export default {
     searchable: { type: Boolean, default: false },
     size: { type: Number, default: 5 },
   },
-  created() {
-    this.checkFocus();
+  data() {
+    return {
+      game: null,
+      selectedMatch: null,
+      isSubmitActive: false,
+      phrase: '',
+    };
   },
   computed: {
     ...mapGetters(['isMobile']),
@@ -117,7 +115,14 @@ export default {
       )([home, visitor])));
     },
   },
-  name: 'matches',
+  watch: {
+    contests() {
+      this.checkFocus();
+    },
+  },
+  created() {
+    this.checkFocus();
+  },
   methods: {
     modalScore(data) {
       this.selectedMatch = { ...data };
@@ -147,11 +152,6 @@ export default {
           console.log('focused but not found');
         }
       }
-    },
-  },
-  watch: {
-    contests() {
-      this.checkFocus();
     },
   },
 };
