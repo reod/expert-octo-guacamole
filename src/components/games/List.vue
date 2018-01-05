@@ -2,7 +2,7 @@
   <div class="root">
     <div class="columns is-multiline">
       <div class="column is-6" v-for="game in games" :key="game.id">
-        <div class="notification" @click="$router.push(`/games/${game.id}`)">
+        <div class="notification" @click="$router.push(`/games/${game.id}`)" v-bind:style="{ backgroundColor: game.color  }">
           <router-link :to="`/games/${game.id}`">
             <p class="title">{{game.name}}</p>
           </router-link>
@@ -119,7 +119,7 @@ export default {
   transition: background 0.3s ease;
   cursor: pointer;
   &:hover {
-    background-color: rgba(66, 66, 66, 0.3);
+    background-color: rgba(66, 66, 66, 0.3) !important;
   }
 }
 .card {

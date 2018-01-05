@@ -5,7 +5,9 @@
       <b-field label="Name" :type="result ? 'is-danger' : ''" :message="result">
         <b-input v-model="properties.name" expanded minlength="10"></b-input>
       </b-field>
-
+      <b-field label="Custom color (#hex, rgba)" :type="result ? 'is-danger' : ''" :message="result">
+        <b-input v-model="properties.color" expanded @keydown.enter.native="validate"></b-input>
+      </b-field>
       <b-field label="Location">
         <b-select v-model="properties.location" placeholder="Select a location">
           <option value="Gdańsk" selected="true">Gdańsk</option>
@@ -62,8 +64,9 @@ export default {
         ranked: false,
         archived: false,
         description: '',
+        color: '',
         rules: '',
-        ...R.pick(['name', 'location', 'ranked', 'description', 'archived', 'rules'], this.game),
+        ...R.pick(['name', 'location', 'ranked', 'description', 'archived', 'rules', 'color'], this.game),
       },
       result: '',
       preview: false,

@@ -1,6 +1,6 @@
 <template>
   <div class="root" v-if="game">
-    <Navigation :game="game" @action="handle" :from="from" />
+    <Navigation :game="game" @action="handle" :from="from" v-bind:style="{ backgroundColor: game.color  }" />
     <div v-if="game.continueIn" class="notification">
       <p>This games has been completed! Following games has been created as continuation of this one:</p>
       <div v-for="following in game.continueIn" :key="following.id">
@@ -63,6 +63,7 @@ export default {
           this.$router.push(`/games/${this.game.id}`);
         case 'updated':  // eslint-disable-line
         case 'completed':
+        case 'started':
           this.modal = false;
           return true;
         default:
