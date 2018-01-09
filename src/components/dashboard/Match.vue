@@ -1,5 +1,5 @@
 <template>
-  <div class="columns match notification results is-primary-1">
+  <div class="columns match notification results is-primary-1" :class="!match.enabled ? 'disabled' : 'enabled'">
     <div class="column is-5 has-text-centered">
       <div class="title">{{ match.home.user.name }}</div>
       <div class="subtitle is-size-6">{{ match.home.club.name }}</div>
@@ -9,7 +9,7 @@
         {{ match.result.home }}&nbsp;:&nbsp;{{ match.result.visitor }}
       </div>
     </div>
-    <div class="column is-2 has-text-centered" v-else>
+    <div class="column is-2 has-text-centered" v-else-if="match.enabled">
       <span v-if="isMobile">
         <div class="button is-primary-2 is-small">
           <b-icon icon="plus" />
@@ -22,6 +22,9 @@
           </div>
         </b-tooltip>
       </span>
+    </div>
+    <div class="column is-2 has-text-centered">
+      Postponed
     </div>
     <div class="column is-5 has-text-centered">
       <div class="title">{{ match.visitor.user.name }}</div>
@@ -70,17 +73,21 @@ export default {
   left: 0;
 }
 .match {
+  &.disabled {
+    opacity: 0.5;
+  }
+  &.enabled {
+    cursor: pointer;
+    &:hover {
+      outline: 1px solid rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+      background: lighten($primary-1, 3%);
+    }
+  }
   position: relative;
   transition: all 0.4s ease;
   outline: 1px solid rgba(255, 255, 255, 0);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0);
-  &:hover {
-    outline: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
-
-    background: lighten($primary-1, 3%);
-    cursor: pointer;
-  }
 }
 </style>
 

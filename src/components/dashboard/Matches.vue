@@ -10,7 +10,7 @@
       <b-pagination :total="relatedMatches.length" :current.sync="page" :is-simple="true" :per-page="perPage" />
     </div>
     <div v-if="relatedMatches.length">
-      <div v-for="(match, index) in relatedMatches.slice((page-1)*perPage, (page-1)*perPage + perPage)" :key="match.id" @click="modalScore(match)">
+      <div v-for="match in pageView" :key="match.id" @click="match.enabled ? modalScore(match) : ()=>{}">
         <Match :match="match" />
       </div>
       <b-modal :active.sync="isSubmitActive" has-modal-card :can-cancel="true" @close="handle('close')">
@@ -55,6 +55,13 @@ export default {
   },
   computed: {
     ...mapGetters(['isMobile']),
+    pageView() {
+      const [from, to] = [
+        (this.page - 1) * this.perPage,
+        ((this.page - 1) * this.perPage) + this.perPage,
+      ];
+      return this.relatedMatches.slice(from, to);
+    },
     relatedMatches() {
       const filterBy = this.completed ? R.reject : R.filter;
       const ifFilter = this.noFilter ? (() => R.identity) : filterBy;
