@@ -3,26 +3,26 @@
     <div class="level">
       <b-field class="has-text-centered level-item">
         <b-checkbox-button v-model="checkboxGroup" native-value="SCHEDULED" type="is-primary-2">
-          <b-icon icon="calendar-o"></b-icon>
+          <b-icon icon="calendar-o" />
           <span>Scheduled</span>
         </b-checkbox-button>
         <b-checkbox-button v-model="checkboxGroup" native-value="PLAYED" type="is-success">
-          <b-icon icon="futbol-o"></b-icon>
+          <b-icon icon="futbol-o" />
           <span>Played</span>
         </b-checkbox-button>
         <b-checkbox-button v-model="checkboxGroup" native-value="WALKOVER" type="is-danger">
-          <b-icon icon="fire"></b-icon>
+          <b-icon icon="fire" />
           <span>Walkover</span>
         </b-checkbox-button>
       </b-field>
       <div class="level-item" v-if="isCompetitor">
         <b-checkbox v-model="onlyMy">
-          <b-icon icon="user"></b-icon>
+          <b-icon icon="user" />
           <span>Only My Matches</span>
         </b-checkbox>
       </div>
     </div>
-    <Matches noFilter :contests="filteredSchedule" searchable :size="filteredSchedule.length" @needFocus="$emit('needFocus')" @updateGame="(game) => $emit('updated', game)" />
+    <Matches no-filter :contests="filteredSchedule" searchable :size="filteredSchedule.length" @needFocus="$emit('needFocus')" @updateGame="(game) => $emit('updated', game)" />
   </div>
 </template>
 <script>
@@ -31,25 +31,14 @@ import { mapGetters } from 'vuex';
 import Matches from '../../dashboard/Matches';
 
 export default {
-  name: 'game-schedule',
+  name: 'GameSchedule',
   components: { Matches },
   props: { game: { type: Object, required: true } },
   data() {
-    return { checkboxGroup: ['SCHEDULED', 'PLAYED'], onlyMy: false };
-  },
-  methods: {
-    club(uid) {
-      return this.game.competitors[uid].club;
-    },
-    user(uid) {
-      return this.game.competitors[uid].user;
-    },
-  },
-  created(){
-    this.onlyMy = !this.isAdmin;
+    return { checkboxGroup: ['SCHEDULED'], onlyMy: false };
   },
   computed: {
-    ...mapGetters(['id','isAdmin']),
+    ...mapGetters(['id', 'isAdmin']),
     isCompetitor() {
       return R.contains(this.id, R.keys(this.game.competitors));
     },
@@ -67,6 +56,17 @@ export default {
           visitor: { club: this.club(contest.visitor), user: this.user(contest.visitor) },
         })),
       )(this.game.schedule);
+    },
+  },
+  created() {
+    this.onlyMy = !this.isAdmin;
+  },
+  methods: {
+    club(uid) {
+      return this.game.competitors[uid].club;
+    },
+    user(uid) {
+      return this.game.competitors[uid].user;
     },
   },
 };

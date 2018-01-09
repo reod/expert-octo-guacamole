@@ -1,12 +1,12 @@
 <template>
   <div class="columns match notification results is-primary-1">
     <div class="column is-5 has-text-centered">
-      <div class="title">{{match.home.user.name}}</div>
-      <div class="subtitle is-size-6">{{match.home.club.name}}</div>
+      <div class="title">{{ match.home.user.name }}</div>
+      <div class="subtitle is-size-6">{{ match.home.club.name }}</div>
     </div>
     <div class="column is-2" v-if="match.result">
       <div class="is-size-4 has-text-weight-bold has-text-centered">
-        {{match.result.home}}&nbsp;:&nbsp;{{match.result.visitor}}
+        {{ match.result.home }}&nbsp;:&nbsp;{{ match.result.visitor }}
       </div>
     </div>
     <div class="column is-2 has-text-centered" v-else>
@@ -24,8 +24,8 @@
       </span>
     </div>
     <div class="column is-5 has-text-centered">
-      <div class="title">{{match.visitor.user.name}}</div>
-      <div class="subtitle is-size-6">{{match.visitor.club.name}}</div>
+      <div class="title">{{ match.visitor.user.name }}</div>
+      <div class="subtitle is-size-6">{{ match.visitor.club.name }}</div>
     </div>
     <div class="priority" v-if="match.recommended > 0.65 && match.status === 'SCHEDULED'">
       <b-icon icon="star" v-if="match.recommended > 0.95" />
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isMobile']),
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,21 +1,19 @@
 <template>
   <div class="root">
-    <p class="title" v-if="title">{{title}}</p>
+    <p class="title" v-if="title">{{ title }}</p>
     <div v-if="searchable">
       <b-field grouped>
-        <b-input expanded v-model="phrase" placeholder="Search for match..." type="search" icon-pack="fa" icon="search">
-        </b-input>
+        <b-input expanded v-model="phrase" placeholder="Search for match..." type="search" icon-pack="fa" icon="search" />
       </b-field>
     </div>
     <div class="notification" v-if="relatedMatches.length > perPage">
-      <b-pagination :total="relatedMatches.length" :current.sync="page" :is-simple="true" :per-page="perPage">
-      </b-pagination>
+      <b-pagination :total="relatedMatches.length" :current.sync="page" :is-simple="true" :per-page="perPage" />
     </div>
     <div v-if="relatedMatches.length">
       <div v-for="(match, index) in relatedMatches.slice((page-1)*perPage, (page-1)*perPage + perPage)" :key="match.id" @click="modalScore(match)">
         <Match :match="match" />
       </div>
-      <b-modal :active.sync="isSubmitActive" has-modal-card :canCancel="true" @close="handle('close')">
+      <b-modal :active.sync="isSubmitActive" has-modal-card :can-cancel="true" @close="handle('close')">
         <ModalScore :match="selectedMatch" @apply="game => handle('apply', game)" />
       </b-modal>
     </div>
@@ -33,7 +31,7 @@ import Match from './Match';
 
 export default {
   name: 'Matches',
-  components: { ModalScore,Match },
+  components: { ModalScore, Match },
   props: {
     contests: {
       type: Array,
@@ -51,8 +49,8 @@ export default {
       selectedMatch: null,
       isSubmitActive: false,
       phrase: '',
-      page:1,
-      perPage: 10
+      page: 1,
+      perPage: 10,
     };
   },
   computed: {
@@ -63,10 +61,13 @@ export default {
       return R.pipe(
         ifFilter(R.propEq('status', 'SCHEDULED')),
         this.search(),
-        R.sortWith([
-          R.descend(R.prop('recommended')),
-          R.descend(R.pipe(R.prop('updated'), d => new Date(d).getTime())),
-        ]),
+        R.uniqBy(({
+          status, home, visitor, isRematch, id,
+        }) => {
+          const pl = [home.user.id, visitor.user.id];
+          const uniqId = status + (isRematch ? '0' : '1') + R.sortBy(R.identity, pl).join(',');
+          return uniqId;
+        }),
         R.take(this.size),
       )(this.contests);
     },
@@ -79,6 +80,7 @@ export default {
         R.xprod(this.lPhrase),
         R.map(([needle, haystack]) => (haystack.indexOf(needle) !== -1) * 1), // TODO: improve it
         R.sum,
+        R.lte(this.lPhrase.length),
         Boolean,
       );
       const prepareCompetitors = R.pipe(
@@ -172,18 +174,6 @@ export default {
 .column {
   // outline: 1px dashed rgba(255, 255, 255, 0.2);
   padding: 0.25rem;
-}
-.match {
-  transition: all 0.4s ease;
-  outline: 1px solid rgba(255, 255, 255, 0);
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0);
-  &:hover {
-    outline: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
-
-    background: lighten($primary-1, 3%);
-    cursor: pointer;
-  }
 }
 </style>
 
