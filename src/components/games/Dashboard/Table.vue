@@ -22,7 +22,7 @@
         <b-table-column sortable field="draws" label="D " class="is-hidden-mobile " width=1 centered numeric>{{props.row.draws}}</b-table-column>
         <b-table-column sortable field="loses" label="L " class="is-hidden-mobile " width=1 centered numeric>{{props.row.loses}}</b-table-column>
         <b-table-column sortable field="balance" label="B " class="is-hidden-mobile " width=1 centered numeric>{{(props.row.balance > 0 ? '+'+props.row.balance : props.row.balance)}}</b-table-column>
-        <b-table-column sortable field="balance" label="GS-GC " class="is-hidden-mobile " width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
+        <b-table-column sortable field="scored" label="GS-GC " class="is-hidden-mobile " width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
         <b-table-column sortable field="points" label="PTS " width=1 centered numeric>{{props.row.points}}</b-table-column>
       </template>
     </b-table>
@@ -37,8 +37,6 @@ export default {
   components: { ClubEmblem },
   props: ['game'],
   name: 'game-table',
-  options: {
-  },
   computed: {
     ...mapGetters(['id', 'isAdmin']),
     isDefaultSort() {
@@ -69,7 +67,6 @@ export default {
       return this.game.competitors[uid].user;
     },
     currentSort(field, order) {
-      console.log(this.defaultSort);
       this.sort = { field, order };
     },
   },

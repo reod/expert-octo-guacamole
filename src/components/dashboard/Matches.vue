@@ -7,38 +7,13 @@
         </b-input>
       </b-field>
     </div>
+    <div class="notification" v-if="relatedMatches.length > perPage">
+      <b-pagination :total="relatedMatches.length" :current.sync="page" :is-simple="true" :per-page="perPage">
+      </b-pagination>
+    </div>
     <div v-if="relatedMatches.length">
-      <div v-for="(match, index) in relatedMatches" :key="match.id" @click="modalScore(match)">
-        <div class="columns match notification results is-primary-1">
-          <div class="column is-5 has-text-centered">
-            <div class="title">{{match.home.user.name}}</div>
-            <div class="subtitle is-size-6">{{match.home.club.name}}</div>
-          </div>
-          <div class="column is-2" v-if="match.result">
-            <div class="is-size-4 has-text-weight-bold has-text-centered">
-              {{match.result.home}}&nbsp;:&nbsp;{{match.result.visitor}}
-            </div>
-          </div>
-          <div class="column is-2 has-text-centered" v-else>
-            <span v-if="isMobile">
-              <div class="button is-primary-2 is-small">
-                <b-icon icon="plus" />
-              </div>
-            </span>
-            <span v-else>
-              <b-tooltip :label="match.gid.name">
-                <div class="button is-primary-2 is-small">
-                  <b-icon icon="plus" />
-                </div>
-              </b-tooltip>
-            </span>
-
-          </div>
-          <div class="column is-5 has-text-centered">
-            <div class="title">{{match.visitor.user.name}}</div>
-            <div class="subtitle is-size-6">{{match.visitor.club.name}}</div>
-          </div>
-        </div>
+      <div v-for="(match, index) in relatedMatches.slice((page-1)*perPage, (page-1)*perPage + perPage)" :key="match.id" @click="modalScore(match)">
+        <Match :match="match" />
       </div>
       <b-modal :active.sync="isSubmitActive" has-modal-card :canCancel="true" @close="handle('close')">
         <ModalScore :match="selectedMatch" @apply="game => handle('apply', game)" />
@@ -54,10 +29,11 @@
 import * as R from 'ramda';
 import { mapGetters } from 'vuex';
 import ModalScore from './ModalScore';
+import Match from './Match';
 
 export default {
   name: 'Matches',
-  components: { ModalScore },
+  components: { ModalScore,Match },
   props: {
     contests: {
       type: Array,
@@ -75,6 +51,8 @@ export default {
       selectedMatch: null,
       isSubmitActive: false,
       phrase: '',
+      page:1,
+      perPage: 10
     };
   },
   computed: {
@@ -86,6 +64,7 @@ export default {
         ifFilter(R.propEq('status', 'SCHEDULED')),
         this.search(),
         R.sortWith([
+          R.descend(R.prop('recommended')),
           R.descend(R.pipe(R.prop('updated'), d => new Date(d).getTime())),
         ]),
         R.take(this.size),
@@ -180,6 +159,9 @@ export default {
 }
 .versus {
   margin-top: 0.25rem;
+}
+.pagination {
+  justify-content: center;
 }
 .notification {
   margin-top: 1.25rem;

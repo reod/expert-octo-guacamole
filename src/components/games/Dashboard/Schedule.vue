@@ -45,8 +45,11 @@ export default {
       return this.game.competitors[uid].user;
     },
   },
+  created(){
+    this.onlyMy = !this.isAdmin;
+  },
   computed: {
-    ...mapGetters(['id']),
+    ...mapGetters(['id','isAdmin']),
     isCompetitor() {
       return R.contains(this.id, R.keys(this.game.competitors));
     },
@@ -54,14 +57,9 @@ export default {
       const isContainedInGroup = R.flip(R.contains)(this.checkboxGroup);
       const isMyMatch = ({ home, visitor }) => !this.onlyMy || R.contains(this.id, [home, visitor]);
       return R.pipe(
-
         R.filter(R.pipe(R.prop('status'), isContainedInGroup)),
         R.filter(isMyMatch),
         R.values,
-        R.sortWith([
-          R.descend(R.pipe(R.prop('updated'), d => new Date(d).getTime())),
-          R.ascend(R.prop('id')),
-        ]),
         R.map(contest => ({
           ...contest,
           gid: this.game,
