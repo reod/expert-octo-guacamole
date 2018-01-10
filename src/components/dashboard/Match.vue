@@ -31,9 +31,11 @@
       <div class="subtitle is-size-6">{{ match.visitor.club.name }}</div>
     </div>
     <div class="priority" v-if="match.recommended > 0.65 && match.status === 'SCHEDULED'">
-      <b-icon icon="star" v-if="match.recommended > 0.95" />
-      <b-icon icon="star-half-o" v-else-if="match.recommended> 0.75" />
-      <b-icon icon="star-o" v-else />
+      <div class="chevrons">
+        <b-icon icon="chevron-up" v-if="match.recommended > 0.95" />
+        <b-icon icon="chevron-up" v-if="match.recommended> 0.75" />
+        <b-icon icon="chevron-up" />
+      </div>
     </div>
   </div>
 </template>
@@ -69,8 +71,17 @@ export default {
 }
 .priority {
   position: absolute;
-  bottom: 0;
+  top: 20%;
   left: 0;
+  .chevrons {
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    .icon {
+      height: 8px;
+      opacity: 0.7;
+    }
+  }
 }
 .match {
   &.disabled {
