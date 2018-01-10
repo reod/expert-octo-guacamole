@@ -71,11 +71,13 @@ export default {
 }
 .priority {
   position: absolute;
-  top: 20%;
   left: 0;
+  top: 0;
+  height: 100%;
   .chevrons {
+    height: 66%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     left: 0;
     .icon {
       height: 8px;
