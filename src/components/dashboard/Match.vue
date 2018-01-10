@@ -23,7 +23,7 @@
         </b-tooltip>
       </span>
     </div>
-    <div class="column is-2 has-text-centered">
+    <div class="column is-2 has-text-centered" v-else>
       Postponed
     </div>
     <div class="column is-5 has-text-centered">

@@ -4,14 +4,14 @@
       <div class="tile is-12 is-parent">
         <div class="tile is-child box notification is-primary">
           <p v-if="loggedId === id" class="title">Your dashboard</p>
-          <p v-else class="title">{{profile.meta.name}}'s dashboard</p>
+          <p v-else class="title">{{ profile.meta.name }}'s dashboard</p>
         </div>
       </div>
     </div>
     <div class="tile is-ancestor">
       <div class="tile is-parent" :class="focusedGame.length > 0 ? 'is-6' : 'is-12'">
         <div class="tile is-child box notification is-primary">
-          <Stats :games="profile.games" :userId="id" />
+          <Stats :games="profile.games" :user-id="id" />
         </div>
       </div>
       <div class="tile is-parent is-6" v-if="focusedGame.length > 0">
@@ -32,12 +32,12 @@
     <div class="tile is-ancestor">
       <div class="tile is-6 is-parent ">
         <div class="tile is-child box notification is-primary">
-          <Matches title="Last Matches " :contests="profile.contests " @refresh="$emit('refresh')" completed :userId="id" />
+          <Matches title="Last Matches " :contests="profile.contests " @refresh="$emit('refresh')" completed :user-id="id" />
         </div>
       </div>
       <div class="tile is-6 is-parent ">
         <div class="tile is-child box notification is-primary">
-          <Matches title="Upcoming " :contests="profile.contests " :userId="id" @refresh="$emit('refresh')" />
+          <Matches title="Upcoming " :contests="profile.contests" sort :user-id="id" @refresh="$emit('refresh')" />
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ import Matches from './Matches';
 import Stats from './stats/Stats';
 
 export default {
-  name: 'dashboard',
+  name: 'Dashboard',
   components: { Matches, Stats, FocusedTable },
   props: ['id', 'profile'],
   computed: {

@@ -41,6 +41,7 @@ export default {
     completed: { type: Boolean, default: false },
     noFilter: { type: Boolean, default: false },
     searchable: { type: Boolean, default: false },
+    sort: { type: Boolean, default: false },
     size: { type: Number, default: 5 },
   },
   data() {
@@ -65,6 +66,11 @@ export default {
     relatedMatches() {
       const filterBy = this.completed ? R.reject : R.filter;
       const ifFilter = this.noFilter ? (() => R.identity) : filterBy;
+      const ifSort = !this.sort
+        ? R.identity
+        : R.sortWith([R.descend(R.prop('recommended')),
+          R.descend(R.pipe(R.prop('updated'), d => new Date(d).getTime())),
+        ]);
       return R.pipe(
         ifFilter(R.propEq('status', 'SCHEDULED')),
         this.search(),
@@ -75,6 +81,7 @@ export default {
           const uniqId = status + (isRematch ? '0' : '1') + R.sortBy(R.identity, pl).join(',');
           return uniqId;
         }),
+        ifSort,
         R.take(this.size),
       )(this.contests);
     },
