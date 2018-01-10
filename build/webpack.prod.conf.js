@@ -1,4 +1,3 @@
-
 const path = require('path');
 const utils = require('./utils');
 const webpack = require('webpack');
@@ -55,6 +54,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       template: 'index.html',
       inject: true,
+      favicon: 'static/favicon.ico',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
