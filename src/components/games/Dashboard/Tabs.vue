@@ -11,6 +11,9 @@
       <b-tab-item label="Competitors" icon="users">
         <Competitors :game="game" @updated="(game) => $emit('updated',game)" />
       </b-tab-item>
+      <b-tab-item label="Timeline" icon="clock-o" v-if="isCompetitor">
+        <Timeline :game="game" />
+      </b-tab-item>
       <b-tab-item label="Rules" v-if="(game.rules || '').length" icon="list-ul">
         <Rules :game="game" />
       </b-tab-item>
@@ -27,16 +30,22 @@ import GameTable from './Table';
 import Competitors from './Competitors';
 import FocusedTable from '../FocusedTable';
 import Settings from './Settings';
+import Timeline from './timeline/Timeline';
 import Rules from './Rules';
 
 export default {
+  name: 'GameTabs',
   components: {
-    Schedule, GameTable, FocusedTable, Competitors, Settings, Rules,
+    Schedule, GameTable, FocusedTable, Competitors, Settings, Rules, Timeline,
   },
   props: ['game', 'index'],
   data() { return { tab: 0 }; },
-  name: 'game-tabs',
-  computed: { ...mapGetters(['id', 'isAdmin', 'isMobile']) },
+  computed: {
+    ...mapGetters(['id', 'isAdmin', 'isMobile']),
+    isCompetitor() {
+      return this.game.table.map(t => t.id).indexOf(this.id) !== -1;
+    },
+  },
   methods: { focus(tab) { this.tab = tab; } },
 };
 </script>

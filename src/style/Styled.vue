@@ -5,7 +5,7 @@
 import ClubSprite from './ClubSprite';
 
 export default {
-  name: 'styled',
+  name: 'Styled',
   components: { ClubSprite },
 };
 
@@ -54,6 +54,7 @@ html {
 }
 // Import Bulma and Buefy styles
 @import "~bulma";
+@import "~bulma-timeline";
 @import "~buefy/src/scss/buefy";
 
 .title {
