@@ -2,9 +2,9 @@
   <div class="main">
     <router-link :to="route">
       <b-tooltip :label="text" position="is-right" class="is-hidden-touch">
-        <b-icon size="is-medium" :type="type" :icon="icon"></b-icon>
+        <b-icon size="is-medium" :type="type" :icon="icon" />
       </b-tooltip>
-      <div class="is-block-touch is-hidden-desktop">
+      <div class="is-block-touch is-hidden-desktop" @click="hideMenu">
         <b-icon size="is-medium" :type="type" :icon="icon" />
       </div>
     </router-link>
@@ -12,17 +12,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
+  name: 'MenuButton',
   props: {
     route: { type: String, default: '/' },
     icon: { type: String, default: 'asterisk' },
     text: String,
     type: { type: String, default: 'is-iconized' },
   },
-  name: 'menu-button',
+  methods: { ...mapActions(['hideMenu']) },
 };
 </script>
- 
+
 <style lang="scss">
 @import "../../style/vars";
 .main {

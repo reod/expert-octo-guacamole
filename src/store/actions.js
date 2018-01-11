@@ -4,8 +4,7 @@ import * as types from './mutation-types';
 import { api } from '../plugins/api';
 
 const refreshProfile = debounce(({ commit, state }) => {
-  api(state)('GET', '/users/myprofile')
-    .then(profile => commit(types.SET_MY_PROFILE, profile));
+  api(state)('GET', '/users/myprofile').then(profile => commit(types.SET_MY_PROFILE, profile));
 }, 250);
 
 const exchangeToken = ({ state, dispatch }) => {
@@ -44,7 +43,9 @@ export default {
     commit(types.NEW_EVENT, event);
   },
   hideMenu({ commit, state }) {
-    if (state.menuVisible) { commit(types.HIDE_MENU); }
+    if (state.menuVisible && state.mobileView) {
+      commit(types.HIDE_MENU);
+    }
   },
   isLoading({ commit }) {
     commit(types.IS_LOADING);
@@ -52,7 +53,10 @@ export default {
   loaded({ commit }) {
     commit(types.LOADED);
   },
-  toggleMenu({ commit, state: { menuVisible } }) {
+  toggleMenu({ commit, state: { menuVisible, mobileView } }) {
+    if (!mobileView) {
+      return false;
+    }
     if (menuVisible) {
       return commit(types.HIDE_MENU);
     }

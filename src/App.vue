@@ -6,7 +6,7 @@
     <div class="viewport" @click="hideMenu">
       <router-view/>
     </div>
-    <b-loading :active.sync="busy" :canCancel="true"></b-loading>
+    <b-loading :active.sync="busy" :can-cancel="true" />
 
   </div>
 </template>
@@ -27,9 +27,8 @@ const idForToken = (token) => {
 };
 
 export default {
-  name: 'app',
+  name: 'App',
   components: { Navigation, Styled, UserBar },
-  methods: { ...mapActions(['hideMenu', 'refreshProfile', 'exchangeToken']) },
   computed: { ...mapGetters(['busy', 'token', 'event', 'id']) },
   watch: {
     token(token, oldToken) {
@@ -42,9 +41,10 @@ export default {
       }
     },
   },
+  methods: { ...mapActions(['hideMenu', 'refreshProfile', 'exchangeToken']) },
 };
 </script>
- 
+
 <style lang="scss">
 @import "./style/vars";
 html,

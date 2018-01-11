@@ -2,16 +2,15 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module',
   },
   env: {
     browser: true,
   },
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:vue/recommended'],
   // required to lint *.vue files
-  plugins: ['html'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -40,5 +39,15 @@ module.exports = {
     ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'vue/max-attributes-per-line': [
+      6,
+      {
+        singleline: 1,
+        multiline: {
+          max: 1,
+          allowFirstLine: false,
+        },
+      },
+    ],
   },
 };
