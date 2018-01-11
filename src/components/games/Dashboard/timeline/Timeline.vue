@@ -1,8 +1,14 @@
 <template>
   <div>
     <div class="timeline is-centered">
-      <header class="timeline-header">
-        <span class="tag is-medium is-primary">{{ toPlay > 0 ? toPlay+' matches left in total' : 'Finished' }}</span>
+      <header class="timeline-header" v-if="game.status==='COMPLETED'">
+        <span class="tag is-medium is-primary"> Completed </span>
+      </header>
+      <header class="timeline-header" v-else>
+        <span class="tag is-medium is-primary">
+          <span>{{ game.status === 'OPEN' ? "Now will be&nbsp;" : '' }}</span>
+          <span>{{ toPlay > 0 ? toPlay+' matches '+( game.status === 'ONGOING' ? 'left' : '' )+' in total' : 'Finished' }}</span>
+        </span>
       </header>
       <div class="timeline-item" v-if="toPlay > 0 && firstUpcoming">
         <div class="timeline-marker is-icon has-text-centered is-gray">
@@ -14,9 +20,11 @@
           <p class="subtitle is-size-7">{{ user.name }}</p>
         </div>
       </div>
+      <div class="timeline-item" />
+      <div class="timeline-item" v-if="game.status === 'OPEN'" />
       <PlayedMatch v-for="match in matches" :key="match.id" :match="match" :game="game" :matches="matches" />
       <header class="timeline-header">
-        <span class="tag is-medium is-primary">Start</span>
+        <span class="tag is-medium is-primary">{{ game.status === 'OPEN' ? 'Will start soon' : 'Start' }}</span>
       </header>
     </div>
   </div>
