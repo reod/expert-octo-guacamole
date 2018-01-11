@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import * as R from 'ramda';
 import { mapActions, mapGetters } from 'vuex';
 import Navigation from '@/components/navigation/Index';
 import Styled from '@/style/Styled';
@@ -29,7 +30,7 @@ const idForToken = (token) => {
 export default {
   name: 'App',
   components: { Navigation, Styled, UserBar },
-  computed: { ...mapGetters(['busy', 'token', 'event', 'id']) },
+  computed: { ...mapGetters(['busy', 'token', 'event', 'id', 'myProfile']) },
   watch: {
     token(token, oldToken) {
       if (idForToken(token) !== idForToken(oldToken)) { this.$ws(this); }
@@ -38,6 +39,9 @@ export default {
       if (type === 'users' && relate === this.id) {
         this.refreshProfile();
         this.exchangeToken();
+      }
+      if (type === 'games' && R.keys(this.myProfile.games).indexOf(relate) !== -1) {
+        this.refreshProfile();
       }
     },
   },

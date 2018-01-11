@@ -2,7 +2,7 @@
   <div>
     <div v-if="isLogged" class="nav">
       <div @click="$router.push(`/games/${game.id}`)" v-for="game in lastGames" :key="game.id">
-        <button class="button  is-outlined is-warning" type="is-primary">{{game.name}}</button>
+        <button class="button  is-outlined is-warning" type="is-primary">{{ game.short || game.name }}</button>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@ import { mapGetters } from 'vuex';
 import * as R from 'ramda';
 
 export default {
-  name: 'userbar',
+  name: 'Userbar',
   computed: {
     ...mapGetters(['isLogged', 'avatar', 'username', 'id', 'myProfile']),
     count() {

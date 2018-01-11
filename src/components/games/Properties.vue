@@ -1,12 +1,18 @@
 <template>
   <div>
-    <p class="title" v-if="title">{{title}}</p>
+    <p class="title" v-if="title">{{ title }}</p>
     <section style="width: 80%">
+      <b-field label="Id" :type="result ? 'is-danger' : ''" :message="result">
+        <b-input v-model="properties.id" expanded minlength="10" readonly />
+      </b-field>
       <b-field label="Name" :type="result ? 'is-danger' : ''" :message="result">
-        <b-input v-model="properties.name" expanded minlength="10"></b-input>
+        <b-input v-model="properties.name" expanded minlength="10" />
+      </b-field>
+      <b-field label="ShortCode" :type="result ? 'is-danger' : ''" :message="result">
+        <b-input v-model="properties.short" expanded minlength="3" />
       </b-field>
       <b-field label="Custom color (#hex, rgba)" :type="result ? 'is-danger' : ''" :message="result">
-        <b-input v-model="properties.color" expanded @keydown.enter.native="validate"></b-input>
+        <b-input v-model="properties.color" expanded @keydown.enter.native="validate" />
       </b-field>
       <b-field label="Location">
         <b-select v-model="properties.location" placeholder="Select a location">
@@ -17,12 +23,12 @@
       </b-field>
 
       <b-field label="Description">
-        <b-input v-model="properties.description" type="textarea"></b-input>
+        <b-input v-model="properties.description" type="textarea" />
       </b-field>
       <b-field label="Rules (markdown)">
-        <b-input v-if="!preview" v-model="properties.rules" type="textarea"></b-input>
+        <b-input v-if="!preview" v-model="properties.rules" type="textarea" />
       </b-field>
-      <div class="content" v-if="preview" v-html="compiledRules"></div>
+      <div class="content" v-if="preview" v-html="compiledRules" />
       <a class="is-block subtitle" @click="preview = !preview">preview</a>
 
       <b-field label="">
@@ -38,7 +44,7 @@
       <b-field>
         <p class="control">
           <button @click="validate" class="button is-primary-2">
-            {{actionName}}
+            {{ actionName }}
           </button>
         </p>
       </b-field>
@@ -50,7 +56,7 @@ import * as R from 'ramda';
 import * as marked from 'marked';
 
 export default {
-  name: 'game-properties-form',
+  name: 'GamePropertiesForm',
   props: {
     game: { type: Object, default: () => ({}) },
     actionName: { type: String, default: 'Create' },
@@ -59,14 +65,16 @@ export default {
   data() {
     return {
       properties: {
+        id: '',
         name: '',
+        short: '',
         location: 'Gdańsk',
         ranked: false,
         archived: false,
         description: '',
         color: '',
         rules: '',
-        ...R.pick(['name', 'location', 'ranked', 'description', 'archived', 'rules', 'color'], this.game),
+        ...R.pick(['id', 'short', 'name', 'location', 'ranked', 'description', 'archived', 'rules', 'color'], this.game),
       },
       result: '',
       preview: false,
