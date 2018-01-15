@@ -1,13 +1,5 @@
 <template>
   <div>
-    <div class="content">
-      <div class="level-item" v-if="isCompetitor">
-        <b-checkbox v-model="onlyMy">
-          <b-icon icon="user" />
-          <span>Only My Matches</span>
-        </b-checkbox>
-      </div>
-    </div>
     <Matches no-filter :contests="filteredSchedule" searchable :size="filteredSchedule.length" @needFocus="$emit('needFocus')" @updateGame="(game) => $emit('updated', game)" />
   </div>
 </template>
@@ -29,10 +21,8 @@ export default {
       return R.contains(this.id, R.keys(this.game.competitors));
     },
     filteredSchedule() {
-      const isMyMatch = ({ home, visitor }) => !this.onlyMy || R.contains(this.id, [home, visitor]);
       return R.pipe(
-        R.filter(R.propEq('status', 'SCHEDULED')),
-        R.filter(isMyMatch),
+        R.filter(R.complement(R.propEq('status', 'SCHEDULED'))),
         R.values,
         R.map(contest => ({
           ...contest,

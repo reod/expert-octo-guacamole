@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import DashboardView from '@/components/dashboard/DashboardView';
 import NotLogged from '@/components/auth/NotLogged';
 import About from '@/components/auth/About';
+import Token from '@/components/auth/Token';
 import ClubsView from '@/components/clubs/View';
 
 import store from '../store';
@@ -20,6 +21,7 @@ const router = new Router({
     },
     { path: '/notLogged', component: NotLogged },
     { path: '/about', component: About },
+    { path: '/token', component: Token },
     { path: '/dashboard', component: DashboardView, meta: { requiresAuth: true } },
     { path: '/clubs', component: ClubsView, meta: { requiresAuth: true } },
     ...games,

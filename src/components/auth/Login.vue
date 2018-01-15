@@ -1,57 +1,31 @@
 <template>
-  <div> </div>
+  <div>
+    <div class="has-text-centered hero is-primary is-medium is-vcentered">
+      <div class="hero-body">
+        <div>
+          <h1 class="title is-size-3">
+            Redirecting to github...
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
 
 const { API_URL } = process.env;
 export default {
-  name: 'log-in',
-  methods: {
-    processMessage(event) {
-      if (event.data.jwt) {
-        this.loaded();
-        const { where = '/dashboard' } = this.$route.query;
-        this.$router.push(where);
-        this.login(event.data.jwt);
-      }
+  name: 'LogIn',
+  data() { return { API_URL }; },
+  computed: {
+    loginUrl() {
+      const { origin } = window.location;
+      const { where = '/dashboard' } = this.$route.query;
+      return `${this.API_URL}/_github?returnUrl=${origin}/token&where=${where}`;
     },
-    ...mapActions(['login', 'isLoading', 'loaded']),
-  },
-  created() {
-    window.addEventListener('message', this.processMessage);
-  },
-  beforeDestroy() {
-    window.removeEventListener('message', this.processMessage);
   },
   mounted() {
-    this.isLoading();
-    const w = window.open(this.iFrameSrc, 'Github Login');
-    const send = () => {
-      w.postMessage('ready?', '*');
-      if (!w.closed) {
-        setTimeout(send, 150);
-      } else {
-        this.loaded();
-      }
-    };
-    send();
-  },
-  data() {
-    return {
-      API_URL,
-    };
-  },
-  computed: {
-    iFrameSrc() {
-      return `${this.API_URL}/_github`;
-    },
+    window.location = this.loginUrl;
   },
 };
 </script>
-<style lang="scss" scoped>
-iframe {
-  width: 100%;
-  border: 1px solid red;
-}
-</style>

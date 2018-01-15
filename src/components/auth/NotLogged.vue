@@ -10,7 +10,7 @@
             Please log in to proceed
           </h2>
           <h2 class="subtitle" v-if="notLoggedCause">
-            {{notLoggedCause}}
+            {{ notLoggedCause }}
           </h2>
           <router-link :to="`/login${redirect ? '?where='+redirect : ''}`">
             <button class="button is-success is-large is-outlined">
@@ -18,25 +18,16 @@
               <b-icon icon="github" />
             </button>
           </router-link>
-          <div class="content pad-top">
-            <h4>
-              Please note: in order to automatically login with your GitHub account you need to enable pop-ups in your browser.
-            </h4>
-            <h5>
-              In case your pop-up is blocked, please reload the page twice.
-            </h5>
-          </div>
         </div>
-
       </div>
     </div>
   </div>
-</template> 
+</template>
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'not-logged',
+  name: 'NotLogged',
   computed: {
     ...mapGetters(['isLogged', 'notLoggedCause']),
     redirect() {
@@ -65,5 +56,4 @@ export default {
   margin-top: 1rem;
 }
 </style>
-
 
