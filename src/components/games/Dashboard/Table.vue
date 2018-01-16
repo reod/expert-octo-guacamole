@@ -17,13 +17,13 @@
             {{club(props.row.id).name}}
           </div>
         </b-table-column>
-        <b-table-column sortable field="played" label=" PL " width=1 centered> {{props.row.played}}</b-table-column>
-        <b-table-column sortable field="wins" label="W " class="is-hidden-mobile " width=1 centered numeric>{{props.row.wins}}</b-table-column>
-        <b-table-column sortable field="draws" label="D " class="is-hidden-mobile " width=1 centered numeric>{{props.row.draws}}</b-table-column>
-        <b-table-column sortable field="loses" label="L " class="is-hidden-mobile " width=1 centered numeric>{{props.row.loses}}</b-table-column>
-        <b-table-column sortable field="balance" label="B " class="is-hidden-mobile " width=1 centered numeric>{{(props.row.balance > 0 ? '+'+props.row.balance : props.row.balance)}}</b-table-column>
-        <b-table-column sortable field="scored" label="GS-GC " class="is-hidden-mobile " width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
-        <b-table-column sortable field="points" label="PTS " width=1 centered numeric>{{props.row.points}}</b-table-column>
+        <b-table-column sortable field="played" label=" PL " title="played" width=1 centered> {{props.row.played}}</b-table-column>
+        <b-table-column sortable field="wins" label="W " title="wins" class="is-hidden-mobile " width=1 centered numeric>{{props.row.wins}}</b-table-column>
+        <b-table-column sortable field="draws" label="D " title="draws" class="is-hidden-mobile " width=1 centered numeric>{{props.row.draws}}</b-table-column>
+        <b-table-column sortable field="loses" label="L " title="loses" class="is-hidden-mobile " width=1 centered numeric>{{props.row.loses}}</b-table-column>
+        <b-table-column sortable field="balance" label="B " title="balance" class="is-hidden-mobile " width=1 centered numeric>{{(props.row.balance > 0 ? '+'+props.row.balance : props.row.balance)}}</b-table-column>
+        <b-table-column sortable field="scored" label="GS-GC " title="scored" class="is-hidden-mobile " width=80 centered numeric>{{props.row.scored}}-{{props.row.lost}}</b-table-column>
+        <b-table-column sortable field="points" label="PTS " title="points" width=1 centered numeric>{{props.row.points}}</b-table-column>
       </template>
     </b-table>
   </div>
